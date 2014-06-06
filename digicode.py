@@ -65,34 +65,32 @@ while True:
     while digit == None:
 
         digit = kp.getKey()
-
-    try:
-
-        with Timeout(5):
-
-            code = str(digit)
-            #Second loop, waiting for the next keypress
-            while True:
-
-                digit = None
-
+    if (digit=="#" ):
+        print "Code tapé : %s" % (code[-4:])
+        break
+    code = str(digit) 
+    while True:
+        try:
+            with Timeout(2):
+        
                 while digit == None:
-
                     digit = kp.getKey()
+
                 #When the user validate by pressing #, we send the last four digit pressed to the output
                 if (digit=="#" ):
 
                     print "Code tapé : %s" % (code[-4:])
-                    sleep(0.5)
+                    break
                 else:
 
                     code += str(digit)
-                    sleep(0.1)
+                    
 
 
-    except Timeout.Timeout:
+        except Timeout.Timeout:
 
-        print "T'es trop lent"
+            print "T'es trop lent"
+            break
 
 
 
