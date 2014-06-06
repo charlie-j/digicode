@@ -66,13 +66,13 @@ while True:
 
         digit = kp.getKey()
     if (digit=="#" ):
-        print "Code tapé : %s" % (code[-4:])
-        break
+        print "Faudrait taper un code avant de valider"
+        continue
     code = str(digit) 
     while True:
         try:
             with Timeout(2):
-        
+                digit = None        
                 while digit == None:
                     digit = kp.getKey()
 
