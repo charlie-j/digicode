@@ -1,5 +1,27 @@
 #!/usr/bin/python
- 
+
+
+####Inspired from :
+#########################################
+## Package:             matrix_keypad
+
+## Script:              matrix_keypad_demo2.py
+
+##
+
+## Author:              Chris Crumpacker
+
+## Date:                August 2013
+
+##
+
+## Project page:        http://crumpspot.blogspot.com/p/keypad-matrix-python-package.html
+
+## PyPI package:        https://pypi.python.org/pypi/matrix_keypad
+#############################################
+### Edited by teou, so that the getKey return value correspond to the keydown and the keyup
+### of a button. 
+
 import RPi.GPIO as GPIO
 from time import sleep
 class keypad():
