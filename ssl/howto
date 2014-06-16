@@ -1,0 +1,10 @@
+
+# Petit memo sur comment générer une clé puis le certificat associé
+
+umask 377
+openssl genrsa 4096 -out private.key
+umask 066
+
+openssl req -new -batch -config req.conf -key private.key -out req.csr
+
+# Balancer ça à cacert (demander à une nounou) pour obtenir le certif
