@@ -26,6 +26,9 @@ def _generate_code():
 class Local(models.Model):
     """Un local (et sa badgeuse/digicode)"""
 
+    class Meta:
+        verbose_name_plural = "locaux"
+
     nom = models.CharField(max_length=255)
 
     description = models.TextField(blank=True)

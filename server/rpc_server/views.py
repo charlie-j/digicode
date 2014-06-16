@@ -6,12 +6,16 @@ from django.views.decorators.csrf import csrf_exempt
 from digicode.models import Code, Local
 
 #from django.http import JsonResponse
+#L'import précédent ne marche pas avant django 1.7. On recode JsonResponse à
+#la main (sic)
+# <kludge>
 from django.http import HttpResponse
 import json
 
 class JsonResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         super(JsonResponse, self).__init__(json.dumps(data),  **kwargs)
+# </kludge>
 
 def register(request):
     """Appelé la première fois qu'un digicode s'initialise. Renvoie
@@ -20,9 +24,12 @@ def register(request):
     raise NotImplementedError
 
 def authenticate(request):
-    """TODO check shared secret and id d'un digicode"""
-    return Local.objects.get(pk=1)
-    return False
+    """Check shared secret et id d'un digicode"""
+    try:
+        return Local.objects.get(pk=request.POST.get('id',0),
+            shared_secret__exact=request.POST.get('shared_secret',''))
+    except Local.DoesNotExist:
+        return None
 
 @csrf_exempt
 def code(request):
