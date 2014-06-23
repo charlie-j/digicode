@@ -13,6 +13,12 @@
         <li>
             Menu principal
         </li>
+        <li>
+            <a href="{% url 'liste' %}">Mes codes</a>
+        </li>
+        <li>
+            À propos
+        </li>
         {% endblock 'menu' %}
         <li class="login">
         {% if user.is_authenticated %}

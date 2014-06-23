@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block 'content' %}
+<h1>Liste de mes codes</h1>
+<ul>
+{% for code in liste %}
+   <li>{{ code.touches }}</li>
+{% endfor %}
+</ul>
+{% endblock 'content' %}

@@ -13,9 +13,8 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'gestion.views.logout_view', name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
-)
+    (r'^rpc/', include('rpc_server.urls')),
 
-urlpatterns += patterns('',
-    (r'^rpc/', include('rpc_server.urls')
- ))
+    url(r'^liste/', 'digicode.views.liste', name='liste'),
+)
 
