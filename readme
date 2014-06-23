@@ -1,0 +1,41 @@
+
+Le texte ci-dessous est un draft
+
+= Gestion d'accès aux locaux par digicode =
+
+== Fonctionnement physique ==
+Chaque local sera muni d'un boitier connecté électriquement, et au réseau
+ethernet. Le boitier sera connecté d'une part à un panneau de contrôle à
+l'extérieur du local sur lequel un utilisateur pourra rentrer un code.
+
+== Communication Local/Serveur ==
+Le serveur central fait tourner une application django (dossier server). Le
+local communique avec cette application via des requêtes http(s) (URI de
+la forme rpc/...). Le serveur renvoie des données au format JSON.
+
+Pour éviter qu'un client http quelconque usurpe un local et essaie des
+combinaisons de touches, le local dispose d'un secret partagé qu'il communique
+au serveur avec chacune de ses requêtes.
+
+Pour éviter que le secret partagé soit compromis, la communication entre le
+client et le serveur est (normalement) chiffrée à l'aide de https et le
+certificat présenté est validé par le client.
+Pour le moment, le certificat attendu est "digitest.crans.org" signé par
+cacert.org.
+
+Lors du premier démarrage du client, celui-ci peut demander au serveur la
+génération d'un nouveau secret partagé, qui sera ensuite stocké sur le digicode.
+Lorsque le serveur génère ce nouveau code, il enregistre dans sa base de donnée
+un nouveau local dont l'administrateur est invité à renseigner les
+caractéristiques (lieux, propriétaire etc).
+Ceci permet de produire une image raspberry générique à flasher sur toutes
+les cartes mémoires, sans avoir à produire de configuration spécifique.
+
+== Gestion des certificats ==
+Le sous-dossier ssl/ contient des informations spécifiques à la génération
+de clé privée et de son certificat.
+
+== Feel free to ask questions ==
+https://lists.crans.org/listinfo/rfid.bde
+rfid.bde@lists.crans.org
+
