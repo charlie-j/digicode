@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Hello world</title>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
+  </head>
+  <body>
+      <div id="banner">
+        <h1>Digicode</h1>
+      </div>
+      <ul id="menu">
+        {% block 'menu' %}
+        <li>
+            Menu principal
+        </li>
+        <li>
+            <a href="{% url 'liste' %}">Mes codes</a>
+        </li>
+        <li>
+            À propos
+        </li>
+        {% endblock 'menu' %}
+        <li class="login">
+        {% if user.is_authenticated %}
+            Connecté en tant que {{user.username}}
+            (<a href="{% url 'logout' %}">se déconnecter</a>)
+        {% else %}
+            <a href="{% url 'login' %}">Se connecter</a>
+        {% endif %}
+        </li>
+        {% if user.is_staff %}
+        <li>
+            <a href="{% url 'admin:index' %}">Administration</a>
+        </li>
+        {% endif %}
+      </ul>
+    <div id="content">
+      {% block 'content' %}
+      <h1>Hello</h1>
+      <img src="{% static "hello.png" %}" alt="hello.png">
+      {% endblock 'content' %}
+    </div>
+  </body>
+</html>
