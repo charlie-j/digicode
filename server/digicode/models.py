@@ -48,7 +48,13 @@ class Local(models.Model):
     def try_code(self, code):
         """Essaie un code. Et le consomme si nécessaire (TODO)"""
         possible = Code.objects.filter(touches=code).filter(locaux=self)
-        return bool(possible)
+        if not(bool(possible)):
+            return false
+        else: 
+            for acces in Acces.objects.filter(user=possible.proprietaire).filter(local=self):
+                if start_time < datetime.today() < end_time :
+                    return true
+            return false
 
 class Acces(models.Model):
     """Un accès à un local donné"""
@@ -62,13 +68,13 @@ class Acces(models.Model):
     )
 
     start_time = models.DateTimeField(null=True, blank=True,
-        help_text=u"Dates correspondant au début de la période de validité",
+        help_text=u"Date correspondant au début de la période de validité",
     )
     end_time = models.DateTimeField(null=True, blank=True,
-        help_text=u"Dates correspondant à la fin de la période de validité",
+        help_text=u"Date correspondant à la fin de la période de validité",
     )
 
-    periodicity = models.IntegerField(
+    periodicity = models.IntegerField(default=0,
         help_text=u"Période en jour de répétition de la validité de l'accès",
     )
 
