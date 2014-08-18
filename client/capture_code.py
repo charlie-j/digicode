@@ -13,6 +13,7 @@ import signal
 
 import time
 
+import ask_code
  
 #The class used to handle timeout while typing a code
 class Timeout():
@@ -80,6 +81,7 @@ while True:
                 if (digit=="#" ):
 
                     print "Code tapé : %s" % (code[-4:])
+                    ask_code.ask_code(code[-4:])
                     break
                 else:
 
