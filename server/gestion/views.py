@@ -16,9 +16,8 @@ def login_view(request):
                 login(request, user)
                 return django.shortcuts.redirect('home')
                 # Redirect to a success page.
-    else:
-        form = forms.Login(request.POST)
-        return django.shortcuts.render(request, 'login.html', {'form': form})
+    form = forms.Login(request.POST)
+    return django.shortcuts.render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
