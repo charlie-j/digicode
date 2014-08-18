@@ -60,6 +60,18 @@ class Acces(models.Model):
     responsable = models.BooleanField(
         help_text=u"Est-ce le responsable de ce local (droits étendus)",
     )
+
+    start_time = models.DateTimeField(null=True, blank=True,
+        help_text=u"Dates correspondant au début de la période de validité",
+    )
+    end_time = models.DateTimeField(null=True, blank=True,
+        help_text=u"Dates correspondant à la fin de la période de validité",
+    )
+
+    periodicity = models.IntegerField(
+        help_text=u"Période en jour de répétition de la validité de l'accès",
+    )
+
     
     # Toute autre restriction d'accès envisageables (créneaux horaires etc)
     # Idem, mais avec des groupes (TODO  ?)
